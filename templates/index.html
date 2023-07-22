@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TEST.</title>
+    <style>
+        body {
+            background-image: url('https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg?auto=compress&cs=tinysrgb&w=1600');
+            background-repeat: no-repeat;
+            background-attachment: fixed; 
+            background-size: 100% 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Align content to the top half */
+            height: 100vh;
+            margin: 0;
+            font-size: 24px;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 20vh; /* Move content to the top half */
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        label {
+            font-size: 24px;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+        }
+
+        input {
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        input[type="submit"] {
+            font-size: 24px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #FFFFFF;
+            border: none;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Companies Near Me</h1>
+        <form method="POST" action="{{ url_for('index') }}">
+            <label for="search">FIND:</label>
+            <input type="text" name="search" id="search" required>
+            <br>
+            <label for="location">NEAR:</label>
+            <input type="text" name="location" id="location" required>
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

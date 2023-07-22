@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Map Example - California Points</title>
+  <style>
+    #map {
+      height: 400px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+  <h1>Results</h1>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>Postal Code</th>
+      <th>State</th>
+      
+    </tr>
+    {% for result in results %}
+    <tr>
+      <td>{{ result.title }}</td>
+      <td>{{ result.phone }}</td>
+      <td>{{ result.address }}</td>
+      <td>{{ result.city }}</td>
+      <td>{{ result.postalCode }}</td>
+      <td>{{ result.state }}</td>
+      <td>{{ result.countryCode }}</td>
+      <td>{{ result.website }}</td>
+      <td>{{ result.location }}</td>
+      <td>{{ result.latitude }}</td>
+      <td>{{ result.longitude }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+
+  <h2>Map</h2>
+  <div id="map"></div>
+
+  <script>
+    var map = L.map('map').setView([{{ results[0].latitude }}, {{ results[0].longitude }}], 13); // Center the map at the first result
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var locations = [
+      {% for result in results %}
+        { name: "{{ result.title }}", latitude: {{ result.latitude }}, longitude: {{ result.longitude }} },
+      {% endfor %}
+    ];
+
+    locations.forEach(function(location) {
+      L.marker([location.latitude, location.longitude])
+        .addTo(map)
+        .bindPopup(location.name);
+    });
+  </script>
+</body>
+</html>
